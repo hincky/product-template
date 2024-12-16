@@ -1,0 +1,68 @@
+.page-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.control-buttons {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.control-buttons button {
+  padding: 10px 20px;
+  font-size: 14pt;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #1890ff;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.control-buttons button:hover {
+  background-color: #40a9ff;
+}
+
+.control-buttons button:active {
+  background-color: #096dd9;
+}
+
+/* 打印时隐藏按钮 */
+@media print {
+  .control-buttons {
+    display: none;
+  }
+  
+  .page-container {
+    gap: 0;
+  }
+}
+
+/* 添加打印样式 */
+@media print {
+  .container {
+    -webkit-print-color-adjust: exact !important;   /* Chrome, Safari */
+    color-adjust: exact !important;                 /* Firefox */
+    print-color-adjust: exact !important;           /* 未来标准 */
+  }
+
+  .container::before {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 确保背景图片显示 */
+  html {
+    -webkit-print-color-adjust: exact;
+    -webkit-filter: opacity(1);
+  }
+}
