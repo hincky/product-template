@@ -2,7 +2,7 @@
   <div id="app">
     <div class="canvas">
       <div class="section theme">
-        <img src="title.png" alt="Title" class="title-image">
+        <!-- 移除 img 标签 -->
       </div>
       <div class="section product-info">
         <div class="rounded-box">
@@ -155,12 +155,9 @@ body, html {
 
 .theme {
   height: 10%;
-}
-
-.title-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background-image: url('title.png'); /* 设置 title.png 作为背景 */
+  background-size: cover; /* 确保图片填充整个区域 */
+  background-position: center;
 }
 
 .product-info, .price, .product-description, .recommendations {
@@ -222,5 +219,12 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+}
+
+/* 打印时隐藏按钮 */
+@media print {
+  .fixed-buttons {
+    display: none;
+  }
 }
 </style>
