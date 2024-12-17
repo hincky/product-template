@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <div class="canvas">
+    <div class="a4-container">
+      <img src="https://hincky.oss-cn-guangzhou.aliyuncs.com/xiangjiang/background.png" alt="Background" class="background-image">
       <div class="section theme">
-        <!-- 移除 img 标签 -->
+        <!-- 使用 CSS 背景图片 -->
+        <img src="https://hincky.oss-cn-guangzhou.aliyuncs.com/xiangjiang/logo.png" alt="title" class="title-image">
       </div>
       <div class="section product-info">
         <div class="rounded-box">
@@ -28,13 +30,102 @@
         </div>
       </div>
     </div>
-    <div class="fixed-buttons">
-      <button @click="previousItem">上一条</button>
-      <button @click="nextItem">下一条</button>
-      <button @click="printPage">打印</button>
-    </div>
   </div>
 </template>
+
+
+<style scoped>
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.a4-container {
+  width: 210mm; /* A4 width */
+  height: 297mm; /* A4 height */
+  position: relative; /* 为了定位背景图片 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* 确保背景图片在最底层 */
+  object-fit: cover; /* 确保图片填充整个区域 */
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1; /* 确保内容在背景图片之上 */
+}
+
+.theme {
+  height: 10%;
+  /* background-image: url('title.png'); */ /* 设置 title.png 作为背景 */
+  background-size: cover; /* 确保图片填充整个区域 */
+  background-position: center;
+}
+
+.product-info, .price, .product-description, .recommendations {
+  padding: 10px;
+}
+
+.product-info {
+  height: 15%;
+}
+
+.price {
+  height: 25%;
+}
+
+.product-description {
+  height: 35%;
+}
+
+.recommendations {
+  height: 15%;
+}
+
+.rounded-box {
+  width: 90%;
+  height: 100%;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.price-text {
+  color: red;
+  font-size: 2em;
+  line-height: 2.5em;
+  text-align: center;
+}
+
+p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.product-info p span {
+  color: lightblue;
+}
+</style>
+
 
 <script>
 import axios from 'axios';
@@ -115,116 +206,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0;
-}
-
-#app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.canvas {
-  width: 210mm; /* A4 width */
-  height: 297mm; /* A4 height */
-  background-image: url('background.png');
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.theme {
-  height: 10%;
-  background-image: url('title.png'); /* 设置 title.png 作为背景 */
-  background-size: cover; /* 确保图片填充整个区域 */
-  background-position: center;
-}
-
-.product-info, .price, .product-description, .recommendations {
-  height: 15%;
-  padding: 10px;
-}
-
-.product-info {
-  height: 15%;
-}
-
-.price {
-  height: 25%;
-}
-
-.product-description {
-  height: 35%;
-}
-
-.recommendations {
-  height: 15%;
-}
-
-.rounded-box {
-  width: 90%;
-  height: 100%;
-  border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.price-text {
-  color: red;
-  font-size: 2em;
-  line-height: 2.5em;
-}
-
-p {
-  margin: 5px 0;
-  color: #333;
-}
-
-.product-info p span {
-  color: lightblue;
-}
-
-.fixed-buttons {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-/* 打印时隐藏按钮 */
-@media print {
-  .fixed-buttons {
-    display: none;
-  }
-}
-</style>
