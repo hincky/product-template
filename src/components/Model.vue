@@ -54,127 +54,127 @@
 
 <style scoped>
 body, html {
-  /* 设置页面和 HTML 的基本样式 */
+  /* 设置页面和 HTML 的基本样式，去除默认的 margin 和 padding，确保页面充满整个视口 */
   margin: 0;
   padding: 0;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0;
+  display: flex; /* 使用 flex 布局，使内容居中 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  background-color: #f0f0f0; /* 设置背景颜色为浅灰色 */
 }
 
 .a4-container {
   /* A4 纸张大小的容器样式 */
-  width: 210mm; /* A4 宽度 */
-  height: 297mm; /* A4 高度 */
-  position: relative; /* 为了定位背景图片 */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 210mm; /* 设置宽度为 A4 纸的宽度 */
+  height: 297mm; /* 设置高度为 A4 纸的高度 */
+  position: relative; /* 设置为相对定位，以便子元素绝对定位 */
+  display: flex; /* 使用 flex 布局 */
+  flex-direction: column; /* 垂直排列子元素 */
+  justify-content: space-between; /* 在子元素之间均匀分布空间 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
   margin-right: 100px; /* 为按钮容器留出空间 */
 }
 
 .background-image {
   /* 背景图片样式 */
-  position: absolute;
+  position: absolute; /* 绝对定位，使其覆盖整个容器 */
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; /* 填满容器宽度 */
+  height: 100%; /* 填满容器高度 */
   z-index: -1; /* 确保背景图片在最底层 */
-  object-fit: cover; /* 确保图片填充整个区域 */
+  object-fit: cover; /* 确保图片按比例填充整个区域 */
 }
 
 .section {
   /* 各个部分的通用样式 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  display: flex; /* 使用 flex 布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  text-align: center; /* 文本居中 */
   z-index: 1; /* 确保内容在背景图片之上 */
 }
 
 .theme {
   /* 主题部分的样式 */
-  height: 10%;
-  background-size: cover; /* 确保图片填充整个区域 */
-  background-position: center;
+  height: 10%; /* 设置高度为容器的 10% */
+  background-size: cover; /* 确保背景图片填充整个区域 */
+  background-position: center; /* 背景图片居中显示 */
 }
 
 .product-info, .price, .product-description, .recommendations {
   /* 各个信息部分的样式 */
-  padding: 10px;
+  padding: 10px; /* 内边距，确保内容不紧贴边框 */
 }
 
 .product-info {
-  height: 15%;
+  height: 15%; /* 设置高度为容器的 15% */
 }
 
 .price {
-  height: 25%;
+  height: 25%; /* 设置高度为容器的 25% */
 }
 
 .product-description {
-  height: 35%;
+  height: 35%; /* 设置高度为容器的 35% */
 }
 
 .recommendations {
-  height: 15%;
+  height: 15%; /* 设置高度为容器的 15% */
 }
 
 .rounded-box {
   /* 圆角盒子的样式 */
-  width: 90%;
-  height: 100%;
-  border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  box-sizing: border-box;
+  width: 90%; /* 宽度为容器的 90% */
+  height: 100%; /* 高度为容器的 100% */
+  border-radius: 15px; /* 圆角半径为 15px */
+  background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+  padding: 10px; /* 内边距，确保内容不紧贴边框 */
+  box-sizing: border-box; /* 包括内边距和边框在内的总宽度和高度 */
 }
 
 .price-text {
   /* 价格文本的样式 */
-  color: red;
-  font-size: 2em;
-  line-height: 2.5em;
-  text-align: center;
+  color: red; /* 文本颜色为红色 */
+  font-size: 2em; /* 字体大小为 2 倍的默认大小 */
+  line-height: 2.5em; /* 行高为 2.5 倍的默认大小，确保文本垂直居中 */
+  text-align: center; /* 文本居中 */
 }
 
 p {
   /* 段落文本的样式 */
-  margin: 5px 0;
-  color: #333;
+  margin: 5px 0; /* 上下外边距为 5px，左右为 0 */
+  color: #333; /* 文本颜色为深灰色 */
 }
 
 .product-info p span {
   /* 产品信息中特定文本的样式 */
-  color: lightblue;
+  color: lightblue; /* 文本颜色为浅蓝色 */
 }
 
 .button-container {
   /* 按钮容器的样式 */
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  position: fixed; /* 固定定位，使其在页面滚动时保持位置不变 */
+  right: 20px; /* 距离右边 20px */
+  top: 50%; /* 垂直居中 */
+  transform: translateY(-50%); /* 使用 transform 进行精确的垂直居中 */
+  display: flex; /* 使用 flex 布局 */
+  flex-direction: column; /* 垂直排列按钮 */
+  gap: 10px; /* 按钮之间的间距为 10px */
 }
 
 .button-container button {
   /* 按钮的样式 */
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
+  padding: 10px 20px; /* 内边距，确保按钮大小合适 */
+  font-size: 16px; /* 字体大小为 16px */
+  cursor: pointer; /* 鼠标悬停时显示手型光标 */
 }
 
 @media print {
   .button-container {
     /* 打印时隐藏按钮容器 */
-    display: none;
+    display: none; /* 不显示按钮容器 */
   }
 }
 </style>
