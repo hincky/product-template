@@ -139,6 +139,7 @@ body, html {
   height: 297mm; /* A4 height */
   background-image: url('background.png');
   background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
