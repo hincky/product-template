@@ -28,30 +28,90 @@
         </div>
       </div>
     </div>
+    <div class="fixed-buttons">
+      <button @click="previousItem">上一条</button>
+      <button @click="nextItem">下一条</button>
+      <button @click="printPage">打印</button>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      series: '系列名称',
-      model: '型号名称',
-      color: '颜色名称',
-      length: '200cm',
-      width: '100cm',
-      height: '50cm',
-      seatDepth: '40cm',
-      chaise: '左',
-      price: '¥9999',
-      frame: '木框架',
-      auxiliary: '海绵',
-      fabric: '棉布',
-      touch: '柔软',
-      seatingFeel: '舒适',
-      similarFabricModels: '型号A, 型号B',
-      similarSeatingModels: '型号C, 型号D'
+      series: '',
+      model: '',
+      color: '',
+      length: '',
+      width: '',
+      height: '',
+      seatDepth: '',
+      chaise: '',
+      price: '',
+      frame: '',
+      auxiliary: '',
+      fabric: '',
+      touch: '',
+      seatingFeel: '',
+      similarFabricModels: '',
+      similarSeatingModels: '',
+      currentIndex: 0,
+      products: []
     };
+  },
+  mounted() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      axios.get('/api/products_on_sale') // 假设你的 API 路径是这样
+        .then(response => {
+          this.products = response.data;
+          this.updateProductInfo();
+        })
+        .catch(error => {
+          console.error("Error fetching data:", error);
+        });
+    },
+    updateProductInfo() {
+      if (this.products.length > 0) {
+        const product = this.products[this.currentIndex];
+        this.series = product.series;
+        this.model = product.model;
+        this.color = product.color;
+        this.length = product.length;
+        this.width = product.width;
+        this.height = product.height;
+        this.seatDepth = product.seatDepth;
+        this.chaise = product.chaise;
+        this.price = product.price;
+        this.frame = product.frame;
+        this.auxiliary = product.auxiliary;
+        this.fabric = product.fabric;
+        this.touch = product.touch;
+        this.seatingFeel = product.seatingFeel;
+        this.similarFabricModels = product.similarFabricModels;
+        this.similarSeatingModels = product.similarSeatingModels;
+      }
+    },
+    previousItem() {
+      if (this.currentIndex > 0) {
+        this.currentIndex--;
+        this.updateProductInfo();
+      }
+    },
+    nextItem() {
+      if (this.currentIndex < this.products.length - 1) {
+        this.currentIndex++;
+        this.updateProductInfo();
+      }
+    },
+    printPage() {
+      window.print();
+    }
   }
 };
 </script>
@@ -67,10 +127,17 @@ body, html {
   background-color: #f0f0f0;
 }
 
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 .canvas {
   width: 210mm; /* A4 width */
   height: 297mm; /* A4 height */
-  background-image: url('test.png');
+  background-image: url('background.png');
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -138,5 +205,21 @@ p {
 
 .product-info p span {
   color: lightblue;
+}
+
+.fixed-buttons {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>
