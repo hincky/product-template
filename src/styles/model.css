@@ -48,6 +48,22 @@ body, html {
   background-position: center; /* 背景图片居中显示 */
 }
 
+.data-text {
+    /* 数据文本的样式 */
+    color: rgb(23, 90, 225); /* 将数据文本颜色改为蓝色 */
+  }
+  
+  .electric-text {
+    font-size: 1em; /* 将字体大小设置为原来的一半 */
+  }
+  
+  .info-item {
+    display: flex; /* 使用 flex 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    text-align: center; /* 文本居中 */
+  }
+
 .product-info, .price, .product-description, .recommendations {
   /* 各个信息部分的样式 */
   padding: 10px; /* 内边距，确保内容不紧贴边框 */
@@ -118,11 +134,42 @@ body, html {
   font-size: 1.6em; /* 字体大小放大一倍 */
 }
 
+.info-dimension {
+    margin-left: 60px; /* 添加左间距 */
+  }
+  
+  .info-dimension span {
+    font-size: 1.5em; /* 字体大小放大一倍 */
+  }
+  
+  .info-seat-chaise {
+    margin-right: 60px; /* 添加右间距 */
+  }
+  
+  .info-chaise {
+    margin-left: 20px; /* 添加左间距 */
+    justify-content: center; /* 水平居中 */
+  
+  }
+  
+  .info-seat-chaise span {
+    font-size: 1.5em; /* 字体大小放大一倍 */
+  }
+
 .price {
   height: 25%; /* 设置高度为容器的 25% */
   display: flex; /* 使用 flex 布局 */
   justify-content: center; /* 水平居中 */
   align-items: center; /* 垂直居中 */
+}
+
+.price-text {
+    /* 价格文本的样式 */
+    color: red; /* 文本颜色为红色 */
+    font-size: 18em; /* 字体大小调整为10倍的默认大小 */
+    line-height: 0.8; /* 行高调整为1，确保文本在圆角矩形内居中 */
+    text-align: center; /* 文本居中 */
+    margin: 0; /* 去掉左右间距 */
 }
 
 .product-description {
@@ -143,24 +190,10 @@ body, html {
   box-sizing: border-box; /* 包括内边距和边框在内的总宽度和高度 */
 }
 
-.price-text {
-  /* 价格文本的样式 */
-  color: red; /* 文本颜色为红色 */
-  font-size: 18em; /* 字体大小调整为10倍的默认大小 */
-  line-height: 0.8; /* 行高调整为1，确保文本在圆角矩形内居中 */
-  text-align: center; /* 文本居中 */
-  margin: 0; /* 去掉左右间距 */
-}
-
 p {
   /* 段落文本的样式 */
   margin: 5px 0; /* 上下外边距为 5px，左右为 0 */
   color: #333; /* 文本颜色为深灰色 */
-}
-
-.product-info p span {
-  /* 产品信息中特定文本的样式 */
-  color: rgb(23, 90, 225); /* 文本颜色为浅蓝色 */
 }
 
 .button-container {
@@ -188,40 +221,33 @@ p {
   }
 }
 
-.data-text {
-  /* 数据文本的样式 */
-  color: rgb(23, 90, 225); /* 将数据文本颜色改为蓝色 */
+.frame-box, .auxiliary-box, .fabric-box, .touch-seatingFeel-box {
+    flex: 1;
+    text-align: center;
 }
 
-.electric-text {
-  font-size: 1em; /* 将字体大小设置为原来的一半 */
+.frame-box ul, .auxiliary-box ul, .fabric-box ul, .touch-seatingFeel-box ul{
+    text-align: left;
 }
 
-.info-item {
-  display: flex; /* 使用 flex 布局 */
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
-  text-align: center; /* 文本居中 */
+.frame-box span, .auxiliary-box span, .fabric-box span, .touch-seatingFeel-box span{
+    color: rgb(92, 94, 97);
+    text-align: left;
 }
 
-.info-dimension {
-  margin-left: 60px; /* 添加左间距 */
+.frame-box p, .auxiliary-box p, .fabric-box p, .touch-seatingFeel-box p{
+    color: rgb(16, 16, 16);
+    text-align: left;
 }
 
-.info-dimension span {
-  font-size: 1.5em; /* 字体大小放大一倍 */
+.des-first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.info-seat-chaise {
-  margin-right: 60px; /* 添加右间距 */
-}
-
-.info-chaise {
-  margin-left: 20px; /* 添加左间距 */
-  justify-content: center; /* 水平居中 */
-
-}
-
-.info-seat-chaise span {
-  font-size: 1.5em; /* 字体大小放大一倍 */
+.des-second-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

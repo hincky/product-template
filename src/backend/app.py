@@ -24,15 +24,16 @@ def read_database_data():
                 series, 
                 model, 
                 color, 
+                electric,
                 length, 
                 width, 
                 height, 
                 seat_depth AS seatDepth, 
                 chaise, 
                 price, 
-                material AS frame, 
-                '' AS auxiliary,  
-                '' AS fabric,     
+                frame, 
+                accessories AS auxiliary,  
+                fabric,     
                 texture AS touch, 
                 seating_feel AS seatingFeel
             FROM products_on_sale
@@ -67,6 +68,7 @@ def get_product(index):
         print("----------------------------------------")
         print(f"系列: {product.get('series', '')}")
         print(f"型号: {product.get('model', '')}")
+        print(f"电动: {product.get('electric', '')}")
         print(f"长度: {product.get('length', '')}")
         print(f"宽度: {product.get('width', '')}")
         print(f"高度: {product.get('height', '')}")

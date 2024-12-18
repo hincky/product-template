@@ -63,10 +63,42 @@
       <div class="section product-description">
         <!-- 产品描述部分 -->
         <div class="rounded-box">
-          <!-- 显示框架和辅料 -->
-          <p>框架: {{ frame }}, 辅料: {{ auxiliary }}</p>
-          <!-- 显示面料、触感和坐感 -->
-          <p>面料: {{ fabric }}, 触感: {{ touch }}, 坐感: {{ seatingFeel }}</p>
+            <div class="des-first-row">
+                <!-- 显示框架和辅料 -->
+                 <div class="frame-box">
+                    <p>框架:</p>
+                    <ul>
+                        <li v-for="item in frame.split(',')" :key="item"><span>{{ item }}</span></li>
+                    </ul>
+                 </div>
+                 <div class="auxiliary-box">
+                    <p>辅料:</p>
+                    <ul>
+                        <li v-for="item in auxiliary.split(',')" :key="item"><span>{{ item }}</span></li>
+                    </ul>
+                 </div>
+            </div>
+            <div class="des-second-row">
+                <!-- 显示面料、触感和坐感 -->
+                 <div class="fabric-box">
+                    <p>面料:</p>
+                    <ul>
+                        <li v-for="item in fabric.split(',')" :key="item"><span>{{ item }}</span></li>
+                    </ul>
+                 </div>
+                 <div class="touch-seatingFeel-box">
+                    <p>触感:</p>
+                    <ul>
+                        <li v-for="item in touch.split(',')" :key="item"><span>{{ item }}</span></li>
+                    </ul>
+                    <p>坐感:</p>
+                    <ul>
+                        <li v-for="item in seatingFeel.split(',')" :key="item"><span>{{ item }}</span></li>
+                    </ul>
+                 </div>
+            </div>
+          
+          
         </div>
       </div>
       <div class="section recommendations">
