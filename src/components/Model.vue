@@ -189,6 +189,7 @@ export default {
       series: '', // 系列
       model: '', // 型号
       color: '', // 颜色
+      electric: '', // 电动
       length: '', // 长度
       width: '', // 宽度
       height: '', // 高度
@@ -202,8 +203,8 @@ export default {
       seatingFeel: '', // 坐感
       similarFabricModels: '', // 面料相似的型号
       similarSeatingModels: '', // 坐感相似的型号
-      currentIndex: 0, // 当前产品索引
-      products: [] // 产品列表
+      products: [], // 产品列表
+      currentIndex: 0 // 当前产品索引
     };
   },
   mounted() {
@@ -213,10 +214,11 @@ export default {
   methods: {
     fetchData() {
       // 获取产品数据的方法
-      axios.get('/api/products_on_sale') // 假设你的 API 路径是这样
+      axios.get('http://127.0.0.1:5000/backend/api/products') // 确保路径正确
         .then(response => {
           this.products = response.data; // 将响应数据赋值给产品列表
           this.updateProductInfo(); // 更新产品信息
+          console.log(this.products); // 打印产品列表
         })
         .catch(error => {
           console.error("Error fetching data:", error); // 捕获并打印错误
@@ -224,24 +226,25 @@ export default {
     },
     updateProductInfo() {
       // 更新当前产品信息的方法
-      if (this.products.length > 0) {
+      if (this.products && this.products.length > 0) {
         const product = this.products[this.currentIndex]; // 获取当前索引的产品
-        this.series = product.series; // 更新系列
-        this.model = product.model; // 更新型号
-        this.color = product.color; // 更新颜色
-        this.length = product.length; // 更新长度
-        this.width = product.width; // 更新宽度
-        this.height = product.height; // 更新高度
-        this.seatDepth = product.seatDepth; // 更新坐深
-        this.chaise = product.chaise; // 更新妃位
-        this.price = product.price; // 更新价格
-        this.frame = product.frame; // 更新框架
-        this.auxiliary = product.auxiliary; // 更新辅料
-        this.fabric = product.fabric; // 更新面料
-        this.touch = product.touch; // 更新触感
-        this.seatingFeel = product.seatingFeel; // 更新坐感
-        this.similarFabricModels = product.similarFabricModels; // 更新面料相似的型号
-        this.similarSeatingModels = product.similarSeatingModels; // 更新坐感相似的型号
+        this.series = product.series || ''; // 更新系列
+        this.model = product.model || ''; // 更新型号
+        this.color = product.color || ''; // 更新颜色
+        this.electric = product.electric || ''; // 更新电动
+        this.length = product.length || ''; // 更新长度
+        this.width = product.width || ''; // 更新宽度
+        this.height = product.height || ''; // 更新高度
+        this.seatDepth = product.seatDepth || ''; // 更新坐深
+        this.chaise = product.chaise || ''; // 更新妃位
+        this.price = product.price || ''; // 更新价格
+        this.frame = product.frame || ''; // 更新框架
+        this.auxiliary = product.auxiliary || ''; // 更新辅料
+        this.fabric = product.fabric || ''; // 更新面料
+        this.touch = product.touch || ''; // 更新触感
+        this.seatingFeel = product.seatingFeel || ''; // 更新坐感
+        this.similarFabricModels = product.similarFabricModels || ''; // 更新面料相似的型号
+        this.similarSeatingModels = product.similarSeatingModels || ''; // 更新坐感相似的型号
       }
     },
     previousItem() {
