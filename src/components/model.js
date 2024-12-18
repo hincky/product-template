@@ -61,9 +61,31 @@ export default {
         this.fabric = product.fabric || ''; // 更新面料
         this.touch = product.touch || ''; // 更新触感
         this.seatingFeel = product.seatingFeel || ''; // 更新坐感
-        this.similarFabricModels = product.similarFabricModels || ''; // 更新面料相似的型号
-        this.similarSeatingModels = product.similarSeatingModels || ''; // 更新坐感相似的型号
+
+        // 调用获取相似面料和坐感的API
+        this.fetchSimilarFabricModels();
+        this.fetchSimilarSeatingModels();
       }
+    },
+    fetchSimilarFabricModels() {
+      // 获取面料相似的型号
+      axios.get(`http://127.0.0.1:5000/backend/api/similar-material-fuzzy/${this.currentIndex}`)
+        .then(response => {
+          this.similarFabricModels = response.data.join(', '); // 更新面料相似的型号
+        })
+        .catch(error => {
+          console.error("Error fetching similar fabric models:", error);
+        });
+    },
+    fetchSimilarSeatingModels() {
+      // 获取坐感相似的型号
+      axios.get(`http://127.0.0.1:5000/backend/api/similar-seating-feel-fuzzy/${this.currentIndex}`)
+        .then(response => {
+          this.similarSeatingModels = response.data.join(', '); // 更新坐感相似的型号
+        })
+        .catch(error => {
+          console.error("Error fetching similar seating models:", error);
+        });
     },
     previousItem() {
       // 切换到上一个产品的方法

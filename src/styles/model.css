@@ -251,3 +251,18 @@ p {
   justify-content: space-between;
   align-items: center;
 }
+
+.re-first-row, .re-second-row {
+    height: 50%;
+}
+
+.re-first-row p, .re-second-row p {
+    color: rgb(16, 16, 16);
+    text-align: center;
+}
+
+.re-first-row span, .re-second-row span {
+    font-size: 1.5em;
+    color: rgb(23, 90, 225);
+    text-align: left;
+}

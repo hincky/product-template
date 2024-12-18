@@ -104,10 +104,14 @@
       <div class="section recommendations">
         <!-- 推荐部分 -->
         <div class="rounded-box">
-          <!-- 显示面料相似的型号 -->
-          <p>面料相似的型号: {{ similarFabricModels }}</p>
-          <!-- 显示坐感相似的型号 -->
-          <p>坐感相似的型号: {{ similarSeatingModels }}</p>
+            <div class="re-first-row">
+                <!-- 显示面料相似的型号 -->
+                <p>面料相似的型号: <span>{{ similarFabricModels }}</span></p>
+            </div>
+            <div class="re-second-row">
+                <!-- 显示坐感相似的型号 -->
+                <p>坐感相似的型号: <span>{{ similarSeatingModels }}</span></p>
+            </div>
         </div>
       </div>
     </div>

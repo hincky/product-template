@@ -110,6 +110,92 @@ def get_previous_product():
         return jsonify(data[current_index - 1])
     return jsonify({"error": "No previous data"}), 404
 
+@app.route('/backend/api/similar-material/<int:index>', methods=['GET'])
+def get_similar_material_products(index):
+    print("\n=== 获取面料相似的沙发型号 ===")
+    data = read_database_data()
+    if 0 <= index < len(data):
+        current_product = data[index]
+        material = current_product.get('fabric', '')
+        
+        # 查找相同面料的沙发型号
+        similar_products = [
+            product['model'] for product in data
+            if product.get('fabric', '') == material and product != current_product
+        ][:3]  # 取前3个结果
+        
+        print(f"面料相似的型号: {similar_products}")
+        return jsonify(similar_products)
+    
+    print(f"错误: 索引 {index} 超出范围")
+    return jsonify({"error": "Product not found"}), 404
+
+@app.route('/backend/api/similar-material-fuzzy/<int:index>', methods=['GET'])
+def get_similar_material_products_fuzzy(index):
+    print("\n=== 获取面料相似的沙发型号（模糊查询） ===")
+    data = read_database_data()
+    if 0 <= index < len(data):
+        current_product = data[index]
+        material = current_product.get('fabric', '')
+        
+        try:
+            connection = mysql.connector.connect(**db_config)
+            cursor = connection.cursor(dictionary=True)
+            # 使用LIKE进行模糊查询
+            query = """
+                SELECT model FROM products_on_sale
+                WHERE fabric LIKE %s AND model != %s
+                LIMIT 3
+            """
+            cursor.execute(query, ('%' + material + '%', current_product['model']))
+            similar_products = [row['model'] for row in cursor.fetchall()]
+            
+            print(f"模糊查询面料相似的型号: {similar_products}")
+            return jsonify(similar_products)
+        except mysql.connector.Error as err:
+            print(f"数据库查询出错: {err}")
+            return jsonify({"error": "Database query error"}), 500
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+    
+    print(f"错误: 索引 {index} 超出范围")
+    return jsonify({"error": "Product not found"}), 404
+
+@app.route('/backend/api/similar-seating-feel-fuzzy/<int:index>', methods=['GET'])
+def get_similar_seating_feel_products_fuzzy(index):
+    print("\n=== 获取坐感相似的沙发型号（模糊查询） ===")
+    data = read_database_data()
+    if 0 <= index < len(data):
+        current_product = data[index]
+        seating_feel = current_product.get('seatingFeel', '')
+        
+        try:
+            connection = mysql.connector.connect(**db_config)
+            cursor = connection.cursor(dictionary=True)
+            # 使用LIKE进行模糊查询
+            query = """
+                SELECT model FROM products_on_sale
+                WHERE seating_feel LIKE %s AND model != %s
+                LIMIT 3
+            """
+            cursor.execute(query, ('%' + seating_feel + '%', current_product['model']))
+            similar_products = [row['model'] for row in cursor.fetchall()]
+            
+            print(f"模糊查询坐感相似的型号: {similar_products}")
+            return jsonify(similar_products)
+        except mysql.connector.Error as err:
+            print(f"数据库查询出错: {err}")
+            return jsonify({"error": "Database query error"}), 500
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+    
+    print(f"错误: 索引 {index} 超出范围")
+    return jsonify({"error": "Product not found"}), 404
+
 if __name__ == '__main__':
     print("\n=== 后端服务启动 ===")
     test_data = read_database_data()
