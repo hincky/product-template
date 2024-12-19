@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, session
 from flask_cors import CORS
 import mysql.connector  # 导入MySQL连接库
+from config import Config
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # 用于Flask会话管理
@@ -8,10 +9,10 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:8080"}})
 
 # 数据库连接配置
 db_config = {
-    'user': 'hincky',
-    'password': 'cky62200',
-    'host': 'localhost',
-    'database': 'xiangjiang'
+    'user': Config.DB_USER,
+    'password': Config.DB_PASSWORD,
+    'host': Config.DB_HOST,
+    'database': Config.DB_NAME
 }
 
 def read_database_data():
