@@ -42,10 +42,10 @@ body, html {
 }
 
 .theme {
-  /* 主题部分的样式 */
-  height: 10%; /* 设置高度为容器的 10% */
-  background-size: cover; /* 确保背景图片填充整个区域 */
-  background-position: center; /* 背景图片居中显示 */
+    /* 主题部分的样式 */
+    height: 10%; /* 设置高度为容器的 10% */
+    background-size: cover; /* 确保背景图片填充整个区域 */
+    background-position: center; /* 背景图片居中显示 */
 }
 
 .data-text {
