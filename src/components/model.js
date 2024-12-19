@@ -1,4 +1,5 @@
 import axios from 'axios'; // 导入 axios ，用于 HTTP 请求
+import html2canvas from 'html2canvas'; // 引入 html2canvas
 
 export default {
   data() {
@@ -22,7 +23,9 @@ export default {
       similarFabricModels: '', // 面料相似的型号
       similarSeatingModels: '', // 坐感相似的型号
       products: [], // 产品列表
-      currentIndex: 0 // 当前产品索引
+      currentIndex: 0, // 当前产品索引
+      searchQuery: '', // 搜索查询
+      suggestions: [], // 添加用于存储建议的数组
     };
   },
   mounted() {
@@ -104,6 +107,44 @@ export default {
     printPage() {
       // 打印页面的方法
       window.print(); // 调用浏览器的打印功能
-    }
+    },
+    generateImage() {
+      // 生成图片的方法
+      const element = document.querySelector('.a4-container'); // 选择要生成图片的元素
+      html2canvas(element, { useCORS: true }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png'); // 将 canvas 转换为图片 URL
+        link.download = `${this.model}.png`; // 设置下载文件名
+        link.click(); // 触发下载
+      }).catch(error => {
+        console.error("Error generating image:", error); // 捕获并打印错误
+      });
+    },
+    searchProducts() {
+      // 搜索产品的方法
+      const index = this.products.findIndex(product => product.model.includes(this.searchQuery));
+      if (index !== -1) {
+        this.currentIndex = index;
+        this.updateProductInfo();
+      } else {
+        console.log("未找到匹配的产品");
+      }
+    },
+    updateSuggestions() {
+      // 更新建议列表的方法
+      if (this.searchQuery) {
+        this.suggestions = this.products
+          .filter(product => product.model.includes(this.searchQuery))
+          .map(product => product.model);
+      } else {
+        this.suggestions = [];
+      }
+    },
+    selectSuggestion(suggestion) {
+      // 选择建议的方法
+      this.searchQuery = suggestion;
+      this.suggestions = [];
+      this.searchProducts();
+    },
   }
 };

@@ -126,8 +126,12 @@ body, html {
   font-size: 1.5em; /* 字体大小放大一倍 */
 }
 
-.info-model p span{
-  font-size: 1.5em; /* 字体大小放大一倍 */
+.model-text{
+  font-size: 2em; /* 字体大小放大一倍 */
+}
+
+.electric-text{
+    font-size: 1.5em; /* 字体大小放大一倍 */
 }
 
 .info-color {
@@ -196,28 +200,65 @@ p {
   color: #333; /* 文本颜色为深灰色 */
 }
 
-.button-container {
-  /* 按钮容器的样式 */
-  position: fixed; /* 固定定位，使其在页面滚动时保持位置不变 */
-  right: 20px; /* 距离右边 20px */
+.function-container {
+  position: fixed; /* 固定位置 */
+  right: 0; /* 靠右 */
   top: 50%; /* 垂直居中 */
-  transform: translateY(-50%); /* 使用 transform 进行精确的垂直居中 */
-  display: flex; /* 使用 flex 布局 */
-  flex-direction: column; /* 垂直排列按钮 */
-  gap: 10px; /* 按钮之间的间距为 10px */
+  transform: translateY(-50%); /* 调整位置以实现垂直居中 */
+  display: flex;
+  flex-direction: column; /* 垂直排列子元素 */
+  gap: 10px; /* 子元素之间的间距 */
+  background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+  padding: 10px; /* 内边距 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+  border-radius: 10px; /* 圆角 */
+  width: 30%; /* 设置宽度为页面的 50% */
+  height: auto; /* 设置高度为页面的 50% */
 }
 
-.button-container button {
-  /* 按钮的样式 */
-  padding: 10px 20px; /* 内边距，确保按钮大小合适 */
-  font-size: 16px; /* 字体大小为 16px */
-  cursor: pointer; /* 鼠标悬停时显示手型光标 */
+.search-container, .button-container {
+  margin: 5px 0; /* 添加上下外边距 */
+  height: 50%;
+  display: flex;
+  flex-direction: column; /* 垂直排列子元素 */
+  align-items: center; /* 水平居中 */
+}
+
+.search-container {
+  width: 100%;
+  transform: scale(1.5); /* 放大1.5倍 */
+  transform-origin: top; /* 以顶部为基准进行放大 */
+}
+
+.button-container {
+  width: 100%;
+  transform-origin: top; /* 以顶部为基准进行放大 */
+  display: flex; /* 使用 flex 布局 */
+  flex-direction: column; /* 垂直排列子元素 */
+  justify-content: space-between; /* 在子元素之间均匀分布空间 */
+}
+
+.button-row {
+  margin: 5px 0; /* 添加上下外边距 */
+  flex: 1; /* 每个 button-row 占据相同的空间 */
+  display: flex; /* 使用 flex 布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+
+.button-row button{
+  margin: 0 10px; /* 在按钮之间添加左右间距 */
+  font-size: 2em;
+  padding: 10px 20px;
 }
 
 @media print {
   .button-container {
     /* 打印时隐藏按钮容器 */
     display: none; /* 不显示按钮容器 */
+  }
+  .search-container {
+    display: none; /* 不显示搜索框容器 */
   }
 }
 
@@ -228,16 +269,20 @@ p {
 
 .frame-box ul, .auxiliary-box ul, .fabric-box ul, .touch-seatingFeel-box ul{
     text-align: left;
+    padding-left: 20px; /* 添加左间距 */
+    list-style-type: disc; /* 设置列表项的样式为实心圆点 */
 }
 
 .frame-box span, .auxiliary-box span, .fabric-box span, .touch-seatingFeel-box span{
     color: rgb(92, 94, 97);
     text-align: left;
+    /* margin-left: px; */
 }
 
 .frame-box p, .auxiliary-box p, .fabric-box p, .touch-seatingFeel-box p{
     color: rgb(16, 16, 16);
     text-align: left;
+    margin-left: 20px;
 }
 
 .des-first-row {
@@ -247,9 +292,14 @@ p {
 }
 
 .des-second-row {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.des-first-row, .des-second-row {
+    padding: auto;
 }
 
 .re-first-row, .re-second-row {
@@ -265,4 +315,24 @@ p {
     font-size: 1.5em;
     color: rgb(23, 90, 225);
     text-align: left;
+}
+
+.suggestions-list {
+  /* 建议列表的样式 */
+  list-style-type: none; /* 去掉默认的列表样式 */
+  padding: 0; /* 去掉内边距 */
+  margin: 0; /* 去掉外边距 */
+  background-color: white; /* 背景颜色为白色 */
+  border: 1px solid #ccc; /* 边框颜色 */
+  max-height: 150px; /* 最大高度 */
+  overflow-y: auto; /* 超出时滚动 */
+}
+
+.suggestions-list li {
+  padding: 10px; /* 内边距 */
+  cursor: pointer; /* 鼠标指针 */
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0; /* 悬停时背景颜色 */
 }

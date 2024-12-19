@@ -3,10 +3,12 @@
     <!-- 主容器，包含整个应用 -->
     <div class="a4-container">
       <!-- 背景图片 -->
-      <img src="https://hincky.oss-cn-guangzhou.aliyuncs.com/xiangjiang/background.png" alt="Background" class="background-image">
+      <!-- <img src="https://hincky.oss-cn-guangzhou.aliyuncs.com/xiangjiang/background.png" alt="Background" class="background-image">  -->
+      <img src="@/static/imgs/background.png" alt="Background" class="background-image">
       <div class="section theme">
         <!-- 主题部分，包含标题图片 -->
-        <img src="https://hincky.oss-cn-guangzhou.aliyuncs.com/xiangjiang/logo.png" alt="title" class="title-image">
+        <!-- <img src="https://hincky.oss-cn-guangzhou.aliyuncs.com/xiangjiang/logo.png" alt="title" class="title-image"> -->
+        <img src="@/static/imgs/logo.png" alt="title" class="title-image">
       </div>
       <div class="section product-info">
         <!-- 产品信息部分 -->
@@ -21,8 +23,8 @@
             <div class="info-item" style="text-align: center;">
               <div class="info-model">
                 <p>
-                  <span class="data-text">{{ model }}</span>
-                  <span v-if="electric" class="data-text electric-text">{{' ' + electric + '电动沙发'}}</span>
+                  <span class="model-text">{{ model }}</span>
+                  <span v-if="electric" class="electric-text">{{' ' + electric + '电动沙发'}}</span>
                 </p>
               </div>
             </div>
@@ -97,8 +99,6 @@
                     </ul>
                  </div>
             </div>
-          
-          
         </div>
       </div>
       <div class="section recommendations">
@@ -115,12 +115,32 @@
         </div>
       </div>
     </div>
-    <div class="button-container">
-      <!-- 按钮容器 -->
-      <button @click="previousItem">Previous</button> <!-- 上一个产品按钮 -->
-      <button @click="nextItem">Next</button> <!-- 下一个产品按钮 -->
-      <button @click="printPage">Print</button> <!-- 打印页面按钮 -->
+    <div class="function-container">
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" v-model="searchQuery" placeholder="搜索产品" @input="updateSuggestions">
+                <button @click="searchProducts">搜索</button>
+                <!-- 添加建议列表 -->
+                <ul v-if="suggestions.length" class="suggestions-list">
+                  <li v-for="suggestion in suggestions" :key="suggestion" @click="selectSuggestion(suggestion)">
+                    {{ suggestion }}
+                  </li>
+                </ul>
+            </div>
+        </div>
+        <div class="button-container">
+            <!-- 按钮容器 -->
+            <div class="button-row">
+                <button @click="previousItem">上一条</button> <!-- 上一个产品按钮 -->
+                <button @click="nextItem">下一条</button> <!-- 下一个产品按钮 -->
+            </div>
+            <div class="button-row">
+                <button @click="printPage">打印</button> <!-- 打印页面按钮 -->
+                <button @click="generateImage">生成图片</button> <!-- 新增生成图片按钮 -->
+            </div>
+        </div>
     </div>
+    
   </div>
 </template>
 
