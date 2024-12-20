@@ -170,10 +170,15 @@ body, html {
 .price-text {
     /* 价格文本的样式 */
     color: red; /* 文本颜色为红色 */
-    font-size: 18em; /* 字体大小调整为10倍的默认大小 */
-    line-height: 0.8; /* 行高调整为1，确保文本在圆角矩形内居中 */
+    font-size: 18vw; /* 使用视口宽度单位动态调整字体大小 */
+    line-height: 1; /* 行高调整为1，确保文本在圆角矩形内居中 */
     text-align: center; /* 文本居中 */
     margin: 0; /* 去掉左右间距 */
+    display: flex; /* 使用 flex 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100%; /* 占满父容器的高度 */
+    padding: 0; /* 去掉内间距 */
 }
 
 .product-description {
@@ -253,13 +258,9 @@ p {
 }
 
 @media print {
-  .button-container {
-    /* 打印时隐藏按钮容器 */
-    display: none; /* 不显示按钮容器 */
-  }
-  .search-container {
-    display: none; /* 不显示搜索框容器 */
-  }
+  .function-container {
+    display: none; /* 不显示功能容器 */
+  }  
 }
 
 .frame-box, .auxiliary-box, .fabric-box, .touch-seatingFeel-box {
@@ -335,4 +336,29 @@ p {
 
 .suggestions-list li:hover {
   background-color: #f0f0f0; /* 悬停时背景颜色 */
+}
+
+.suggestions-list li.highlighted {
+  background-color: #e0e0e0; /* 高亮时的背景颜色 */
+}
+
+.price-modification-container {
+  /* 临时修改价格容器的样式 */
+  display: flex;
+  flex-direction: row; /* colume 垂直排列子元素 row 水平排列子元素*/
+  align-items: center;
+  justify-content: center; /* 水平居中 */
+  margin-top: 10px;
+  width: 100%; /* 占满父容器宽度 */
+}
+
+.price-modification-container input {
+  margin-right: 5px; /* 添加右间距 */
+  padding: 5px;
+  font-size: 1em;
+}
+
+.price-modification-container button {
+  padding: 5px 10px;
+  font-size: 1em;
 }

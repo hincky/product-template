@@ -26,11 +26,17 @@ export default {
       currentIndex: 0, // 当前产品索引
       searchQuery: '', // 搜索查询
       suggestions: [], // 添加用于存储建议的数组
+      selectedSuggestionIndex: -1, // 添加用于跟踪选中建议的索引
+      temporaryPrice: '', // 添加用于存储临时价格的变量
     };
   },
   mounted() {
     // 组件挂载时调用
     this.fetchData(); // 获取数据
+    window.addEventListener('keydown', this.handleKeyDown); // 添加键盘事件监听
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.handleKeyDown); // 移除键盘事件监听
   },
   methods: {
     fetchData() {
@@ -136,15 +142,37 @@ export default {
         this.suggestions = this.products
           .filter(product => product.model.includes(this.searchQuery))
           .map(product => product.model);
+        this.selectedSuggestionIndex = -1; // 重置选中索引
       } else {
         this.suggestions = [];
+      }
+    },
+    handleKeyDown(event) {
+      if (this.suggestions.length > 0) {
+        if (event.key === 'ArrowDown') {
+          // 向下箭头
+          this.selectedSuggestionIndex = (this.selectedSuggestionIndex + 1) % this.suggestions.length;
+        } else if (event.key === 'ArrowUp') {
+          // 向上箭头
+          this.selectedSuggestionIndex = (this.selectedSuggestionIndex - 1 + this.suggestions.length) % this.suggestions.length;
+        } else if (event.key === 'Enter' && this.selectedSuggestionIndex !== -1) {
+          // 回车键
+          this.selectSuggestion(this.suggestions[this.selectedSuggestionIndex]);
+        }
       }
     },
     selectSuggestion(suggestion) {
       // 选择建议的方法
       this.searchQuery = suggestion;
       this.suggestions = [];
+      this.selectedSuggestionIndex = -1; // 重置选中索引
       this.searchProducts();
+    },
+    applyTemporaryPrice() {
+      // 应用临时价格的方法
+      if (this.temporaryPrice) {
+        this.price = this.temporaryPrice; // 将临时价格赋值给显示的价格
+      }
     },
   }
 };

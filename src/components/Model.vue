@@ -118,15 +118,23 @@
     <div class="function-container">
         <div class="search-container">
             <div class="search-box">
-                <input type="text" v-model="searchQuery" placeholder="搜索产品" @input="updateSuggestions">
+                <input type="text" v-model="searchQuery" placeholder="搜索产品" @input="updateSuggestions" @keyup.enter="searchProducts">
                 <button @click="searchProducts">搜索</button>
                 <!-- 添加建议列表 -->
                 <ul v-if="suggestions.length" class="suggestions-list">
-                  <li v-for="suggestion in suggestions" :key="suggestion" @click="selectSuggestion(suggestion)">
+                  <li v-for="(suggestion, index) in suggestions" 
+                      :key="suggestion" 
+                      @click="selectSuggestion(suggestion)"
+                      :class="{ 'highlighted': index === selectedSuggestionIndex }">
                     {{ suggestion }}
                   </li>
                 </ul>
             </div>
+        </div>
+        <div class="price-modification-container">
+            <!-- 临时修改价格的容器 -->
+            <input type="number" v-model="temporaryPrice" placeholder="临时修改价格">
+            <button @click="applyTemporaryPrice">应用</button>
         </div>
         <div class="button-container">
             <!-- 按钮容器 -->
